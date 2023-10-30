@@ -90,24 +90,26 @@ public class Execute {
 
         System.out.print("(1) 도서번호를 입력해주세요.(유일한 번호) >> ");
         String id = sc.nextLine();
-        System.out.print("(2) 도서명을 입력해주세요. >> ");
-        String name = sc.nextLine();
-        System.out.print("(3) 저자명을 입력해주세요. >> ");
-        String author = sc.nextLine();
-        System.out.print("(4) isbn을 입력해주세요. >> ");
-        String isbn = sc.nextLine();
-        System.out.print("(5) 출간일을 입력해주세요.(YYYY-MM-DD형식) >> ");
-        String publishDate = sc.nextLine();
+        if(bm.idCheck(Long.parseLong(id))) {
+            System.out.print("(2) 도서명을 입력해주세요. >> ");
+            String name = sc.nextLine();
+            System.out.print("(3) 저자명을 입력해주세요. >> ");
+            String author = sc.nextLine();
+            System.out.print("(4) isbn을 입력해주세요. >> ");
+            String isbn = sc.nextLine();
+            System.out.print("(5) 출간일을 입력해주세요.(YYYY-MM-DD형식) >> ");
+            String publishDate = sc.nextLine();
 
-        // id, isbn는 String 타입이므로 Long으로 변환 후 매개값을 주어야한다.
-        // publishedDate는 String 타입인데 LocalDate 타입으로 변환해주어야 한다. ==> "구글링"
-        Book book = new Book(Long.parseLong(id),
-                        name,
-                        author,
-                        Long.parseLong(isbn),
-                        LocalDate.parse(publishDate));
+            // id, isbn는 String 타입이므로 Long으로 변환 후 매개값을 주어야한다.
+            // publishedDate는 String 타입인데 LocalDate 타입으로 변환해주어야 한다. ==> "구글링"
+            Book book = new Book(Long.parseLong(id),
+                    name,
+                    author,
+                    Long.parseLong(isbn),
+                    LocalDate.parse(publishDate));
 
-        bm.addBook(book);
+            bm.addBook(book);
+        } else System.out.println("ID값이 이미 존재합니다. ");
     }
 
     private static void printAllBook() {
