@@ -10,7 +10,7 @@ public class Execute {
     public static void main(String[] args) {
 
         while (true) {
-            System.out.println("■■■■■■■■■■■ 도서 관리 프로그램 ■■■■■■■■■■■");
+            System.out.println("■■■■■■■■ 도서 관리 프로그램 ■■■■■■■■");
             System.out.println("(1) 도서 조회");
             System.out.println("(2) 도서 등록");
             System.out.println("(3) 도서 수정");
@@ -52,32 +52,32 @@ public class Execute {
         System.out.println("삭제하고자 하는 도서의 도서번호를 입력하세요.");
         System.out.print("선택 >> ");
         long id2 = Long.parseLong(sc.nextLine());
-        bm.checkBook(id2);
-        // bm.removeBook(?);
+        bm.removeBook(id2);
     }
 
     private static void updateBook() {
-        System.out.println("■■■■■■■■■■■ 도서 수정 ■■■■■■■■■■■");
-        System.out.println("수정하고자 하는 도서의 도서번호를 입력하세요.");
-        System.out.print("선택 >> ");
+        boolean check = false;
+        System.out.println("수정 메서드 실행");
+        System.out.print("수정하고자 하는 도서번호를 입력하세요: ");
         long id2 = Long.parseLong(sc.nextLine());
-        bm.printBook(id2);
-        System.out.print("(1) 새로운 도서번호를 입력해주세요.(유일한 번호) >> ");
-        String id = sc.nextLine();
-        System.out.print("(2) 새로운 도서명을 입력해주세요. >> ");
-        String name = sc.nextLine();
-        System.out.print("(3) 새로운 저자명을 입력해주세요. >> ");
-        String author = sc.nextLine();
-        System.out.print("(4) 새로운 isbn을 입력해주세요. >> ");
-        String isbn = sc.nextLine();
-        System.out.print("(5) 새로운 출간일을 입력해주세요.(YYYY-MM-DD형식) >> ");
-        String publishDate = sc.nextLine();
-        Book book = new Book(Long.parseLong(id),
-                name,
-                author,
-                Long.parseLong(isbn),
-                LocalDate.parse(publishDate));
-        bm.updateBook(book);
+        check = bm.printBook(id2);
+        if(check) {
+            System.out.println("[수정 정보를 입력해주세요]");
+            System.out.print("제목: ");
+            String name = sc.nextLine();
+            System.out.print("저자: ");
+            String author = sc.nextLine();
+            System.out.print("isbn: ");
+            String isbn = sc.nextLine();
+            System.out.print("출판일(YYYY-MM-DD): ");
+            String publishDate = sc.nextLine();
+            Book book = new Book(id2,
+                    name,
+                    author,
+                    Long.parseLong(isbn),
+                    LocalDate.parse(publishDate));
+            bm.updateBook(book);
+        }
     }
 
     private static void addBook() {
@@ -108,7 +108,6 @@ public class Execute {
                         LocalDate.parse(publishDate));
 
         bm.addBook(book);
-        System.out.println("--- 도서 [" + name + "] 등록이 완료되었습니다. ---");
     }
 
     private static void printAllBook() {
