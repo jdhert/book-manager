@@ -40,7 +40,7 @@ public class Execute {
                     System.out.println("프로그램 종료!");
                     return; // 메소드를 종료
                 default:
-                    System.out.println("보기에 나와있는 것을 입려하세요!!! :( ");
+                    System.out.println("보기에 나와있는 것을 입력하세요!!! :( ");
                     break;
             }
 
@@ -56,12 +56,10 @@ public class Execute {
     }
 
     private static void updateBook() {
-        boolean check = false;
         System.out.println("수정 메서드 실행");
         System.out.print("수정하고자 하는 도서번호를 입력하세요: ");
         long id2 = Long.parseLong(sc.nextLine());
-        check = bm.printBook(id2);
-        if(check) {
+        if(bm.printBook(id2)) {
             System.out.println("[수정 정보를 입력해주세요]");
             System.out.print("제목: ");
             String name = sc.nextLine();

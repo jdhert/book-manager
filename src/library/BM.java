@@ -9,17 +9,8 @@ public class BM extends BookManager {
     private static int m;
     @Override
     public void addBook(Book book) {
-//        boolean check = true;
-//        for(int i=0; i<bookList.size(); i++) {
-//            if (book.getId() == bookList.get(i).getId())
-//                check = false;
-//        }
-//        if (idCheck(book.getId()))
-//            System.out.println("ID값이 이미 존재합니다. ");
-//        else {
             bookList.add(book);
             System.out.println("--- 도서 [" + book.getName() + "] 등록이 완료되었습니다. ---");
-//        }
     }
     public  boolean idCheck(long id){
         for(int i=0; i<bookList.size(); i++) {
