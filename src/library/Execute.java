@@ -51,15 +51,14 @@ public class Execute {
         System.out.println("■■■■■■■■■■■ 도서 삭제 ■■■■■■■■■■■");
         System.out.println("삭제하고자 하는 도서의 도서번호를 입력하세요.");
         System.out.print("선택 >> ");
-        long id2 = Long.parseLong(sc.nextLine());
-        bm.removeBook(id2);
+        bm.removeBook(Long.parseLong(sc.nextLine()));
     }
 
     private static void updateBook() {
         System.out.println("수정 메서드 실행");
         System.out.print("수정하고자 하는 도서번호를 입력하세요: ");
-        long id2 = Long.parseLong(sc.nextLine());
-        if(bm.printBook(id2)) {
+        long id = Long.parseLong(sc.nextLine());
+        if(bm.checkBook(id)) {
             System.out.println("[수정 정보를 입력해주세요]");
             System.out.print("제목: ");
             String name = sc.nextLine();
@@ -69,7 +68,7 @@ public class Execute {
             String isbn = sc.nextLine();
             System.out.print("출판일(YYYY-MM-DD): ");
             String publishDate = sc.nextLine();
-            Book book = new Book(id2,
+            Book book = new Book(id,
                     name,
                     author,
                     Long.parseLong(isbn),

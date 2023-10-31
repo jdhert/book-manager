@@ -6,15 +6,15 @@ import java.util.ArrayList;
 public class BM extends BookManager {
 
     private ArrayList<Book> bookList = new ArrayList<>();
-    private static int m;
+
     @Override
     public void addBook(Book book) {
             bookList.add(book);
             System.out.println("--- 도서 [" + book.getName() + "] 등록이 완료되었습니다. ---");
     }
     public  boolean idCheck(long id){
-        for(int i=0; i<bookList.size(); i++) {
-            if (id == bookList.get(i).getId())
+        for (Book b: bookList){
+            if(b.getId() == id)
                 return false;
         } return true;
     }
@@ -34,44 +34,41 @@ public class BM extends BookManager {
             System.out.println();
         }
     }
-    public boolean printBook(long id){
-        boolean check = false;
-        for(int i=0; i< bookList.size();i++) {
-            if (id == bookList.get(i).getId()) {
-                m = i;
-                System.out.print(bookList.get(i).getId());
-                System.out.print(" / ");
-                System.out.print(bookList.get(i).getName());
-                System.out.print(" / ");
-                System.out.print(bookList.get(i).getAuthor());
-                System.out.print(" / ");
-                System.out.print(bookList.get(i).getIsbn());
-                System.out.print(" / ");
-                System.out.print(bookList.get(i).getPublishedDate());
-                System.out.println();
-                check = true;
+    public boolean checkBook(long id){
+
+        for (Book b: bookList){
+            if(b.getId() == id) {
+                return true;
             }
-        }  if(check == false) {
-            System.out.println("해당 도서가 존재하지 않습니다!!! ");
-            return check;
-        } else return check;
+        }
+        System.out.println("해당 도서가 존재하지 않습니다!!! ");
+        return false;
+
     }
 
     @Override
     public void updateBook(Book book) {
-        bookList.set(m, book);
+        for (Book b: bookList){
+            if(book.getId().equals(b.getId())) {
+                b.setName(book.getName());
+                b.setAuthor(book.getAuthor());
+                b.setIsbn(book.getIsbn());
+                b.setPublishedDate(book.getPublishedDate());
+            }
+        }
         System.out.println("수정이 완료되었습니다.");
-    }
 
+    }
 
     @Override
     public void removeBook(long id) {
         boolean check = true;
-        for(int i=0; i< bookList.size();i++) {
-            if (id == bookList.get(i).getId()) {
-                bookList.remove(i);
+        for (Book b: bookList) {
+            if (id == b.getId()) {
+                bookList.remove(b);
                 System.out.println("삭제가 완료되었습니다.");
                 check = false;
+                break;
             }
         }
         if(check)
